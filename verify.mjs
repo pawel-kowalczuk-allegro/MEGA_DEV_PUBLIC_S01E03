@@ -22,7 +22,8 @@ const source = fs.readFileSync(new URL('./support-kb/src/routes/kb/incidents/447
 const signature = source.match(/^signature: '(.*)'$/m)[1];
 const html = fs.readFileSync(new URL('./rendered/kb/incidents/4471-split/index.html', import.meta.url), 'utf8');
 for (const text of ['379', '33', '412', '5 reports read as a one-day move',
-  'different causes — keep apart', 'reports received and merged into #4471, per week', deskRef(signature)]) {
+  'different causes — keep apart', 'reports received and merged into #4471, per week',
+  'booking-v3 form retired', 'fix(dates): parse dd/mm for eu locales', deskRef(signature)]) {
   assert.ok(html.includes(text), `Rendered evidence missing: ${text}`);
 }
 assert.ok(!html.includes('no desk ref:'));

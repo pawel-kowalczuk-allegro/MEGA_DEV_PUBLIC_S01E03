@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · split by cause, not subject'
 owner: Paweł Kowalczuk / support desk
-status: investigated
+status: resolved
 reviewed: 2026-10-28
 signature: 'Paweł Kowalczuk · GPT-6.1 Sol · S01E03 · 2026-10-28'
 ---
@@ -19,8 +19,22 @@ signature: 'Paweł Kowalczuk · GPT-6.1 Sol · S01E03 · 2026-10-28'
 
 The [original incident](/kb/incidents/4471) says that every report is one parser problem.
 Its live cause table contradicts that claim. The export contains two different problems;
-one queued parser fix does not address both. These are findings from the 4 October export,
-not evidence that either fix has shipped.
+one queued parser fix does not address both. The counts below describe the 4 October export;
+the engineering outcome comes from the later Challenge-page update.
+
+## Engineering outcome · 5 October
+
+The [course's engineering update](https://hq.mega.dev/challenges/what-it-shows) says
+`#4471 · closed 05 oct`:
+
+- **Parser — fixed:** `fix(dates): parse dd/mm for eu locales`. Parser issue 1 is closed
+  as completed, based on this engineering evidence, not merely on finishing the investigation.
+- **Hint — won't fix:** `booking-v3 form retired`. Form-hint issue 2 is closed as not
+  planned, not as fixed. Retiring the form is not evidence that its hint was repaired.
+
+These distinct outcomes replace the original incident's blanket “known, one fix queued”
+claim without changing the historical export or its counts. Recheck the live queue before
+triaging a new report against either closure.
 
 <Callout kind="warn">
 Keep the parser and form-hint problems separate. A shared subject, a browser locale,

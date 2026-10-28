@@ -28,7 +28,16 @@ them under parser. This caveat remains visible rather than inventing a third cau
 The rendered page includes the computed cause table, weekly received/merged timeline,
 interactive deduplication examples, and a desk reference generated from its signature.
 The original accepted decision and all original export files are unchanged.
-All findings and counts describe the 4 October 2026 export, not the live queue.
+All report counts describe the 4 October 2026 export, not the live queue.
+
+## Engineering outcome
+
+After the first submission, the Challenge page displayed a new engineering update:
+original #4471 closed on 5 October. Parser is **fixed** (`fix(dates): parse dd/mm for eu
+locales`), while hint is **won't fix** (`booking-v3 form retired`). Issue 1 is closed as
+completed; issue 2 is closed as not planned. Both issue histories record the evidence.
+The signed KB page includes the distinct outcomes. Closing both as completed was an
+earlier error, corrected after refreshing the Challenge page.
 
 ## Reproduce
 
