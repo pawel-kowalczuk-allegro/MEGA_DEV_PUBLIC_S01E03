@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { groupByCause, uniqueById, readAs } from './support-kb/src/lib/kb/causes.ts';
+import { groupByCause, uniqueById, readAs } from './src/lib/kb/causes.ts';
 
-const data = new URL('./support-kb/src/lib/data/', import.meta.url);
+const data = new URL('./src/lib/data/', import.meta.url);
 const reports = JSON.parse(fs.readFileSync(new URL('reports-4471.json', data)));
 const notes = JSON.parse(fs.readFileSync(new URL('desk-notes.json', data)));
 const tenants = new Map(fs.readdirSync(new URL('tenants/', data)).map((file) => {

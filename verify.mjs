@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { dayFirst, causeOf, sameCause } from './support-kb/src/lib/kb/causes.ts';
-import { deskRef } from './support-kb/src/lib/kb/desk-ref.ts';
+import { dayFirst, causeOf, sameCause } from './src/lib/kb/causes.ts';
+import { deskRef } from './src/lib/kb/desk-ref.ts';
 
 const analysis = JSON.parse(fs.readFileSync(new URL('./analysis.json', import.meta.url)));
 assert.equal(analysis.rawRows, 427);
@@ -18,7 +18,7 @@ assert.equal(causeOf({ channel: 'form' }, v3), 'hint');
 assert.equal(causeOf({ channel: 'app' }, v3), 'parser');
 assert.equal(sameCause({ channel: 'email' }, undefined, { channel: 'email' }, undefined), false);
 
-const source = fs.readFileSync(new URL('./support-kb/src/routes/kb/incidents/4471-split/+page.svx', import.meta.url), 'utf8');
+const source = fs.readFileSync(new URL('./src/routes/kb/incidents/4471-split/+page.svx', import.meta.url), 'utf8');
 const signature = source.match(/^signature: '(.*)'$/m)[1];
 const html = fs.readFileSync(new URL('./rendered/kb/incidents/4471-split/index.html', import.meta.url), 'utf8');
 for (const text of ['379', '33', '412', '5 reports read as a one-day move',

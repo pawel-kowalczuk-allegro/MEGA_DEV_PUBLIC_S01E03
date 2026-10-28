@@ -1,8 +1,9 @@
 # S01E03 — what it shows
 
 Investigation of support ticket #4471 from the MEGA.dev course's fictional support desk.
-The supplied knowledge-base export is preserved under `support-kb/`; the added page
-and local build configuration make its executable evidence readable.
+The supplied knowledge-base export is preserved at the repository root (`src/`);
+its original README is `EXPORT-README.md`. The added page and local build configuration
+make its executable evidence readable.
 
 ## Filed problems
 
@@ -19,7 +20,7 @@ them under parser. This caveat remains visible rather than inventing a third cau
 
 ## Deliverables
 
-- Signed KB source: [`support-kb/src/routes/kb/incidents/4471-split/+page.svx`](support-kb/src/routes/kb/incidents/4471-split/+page.svx).
+- Signed KB source: [`src/routes/kb/incidents/4471-split/+page.svx`](src/routes/kb/incidents/4471-split/+page.svx).
 - Rendered KB page: [`rendered/kb/incidents/4471-split/index.html`](rendered/kb/incidents/4471-split/index.html).
 - Full rendered KB and its CSS/JavaScript assets: [`rendered/`](rendered/).
 - Reproducible counts, date ranges, intake-label discrepancies and report IDs: [`analysis.json`](analysis.json).
@@ -46,7 +47,6 @@ Node.js 22.22 or a compatible version is required. From the repository root:
 ```sh
 node --experimental-strip-types analyze.mjs
 node prepare-issues.mjs
-cd support-kb
 npm ci
 npm run build
 ```

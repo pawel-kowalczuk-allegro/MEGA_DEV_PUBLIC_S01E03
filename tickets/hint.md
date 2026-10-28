@@ -8,7 +8,7 @@ Affected tenants: alder.physio (de-DE), copper.studio (es-ES), pale.harbour (pt-
 
 **33 unique reports** merged into original ticket #4471 in the 4 October 2026 export. First received 2026-04-17; last received 2026-09-22; 3 tenants.
 
-Counted with the exported uniqueById and groupByCause functions in support-kb/src/lib/kb/causes.ts, resolving tenant locale/form from the tenant directory via Intl.DateTimeFormat date order. All 427 export rows reduce to 412 unique IDs (15 overlap rows). The two cause counts sum to 412; no report belongs to both.
+Counted with the exported uniqueById and groupByCause functions in src/lib/kb/causes.ts, resolving tenant locale/form from the tenant directory via Intl.DateTimeFormat date order. All 427 export rows reduce to 412 unique IDs (15 overlap rows). The two cause counts sum to 412; no report belongs to both.
 
 Intake labels within this group: parser: 15; hint: 18. These are not the cause counts.
 
@@ -16,7 +16,7 @@ Intake labels within this group: parser: 15; hint: 18. These are not the cause c
 
 Keep this cause separate from the other date problem. Subject-only merging can combine different causes and split one cause across different subjects. Unknown tenants remain unresolved. The old accepted decision is preserved; the new signed KB page explains the evidence and safer triage.
 
-Run node --experimental-strip-types analyze.mjs from the repository root to reproduce the count. The signed KB source is support-kb/src/routes/kb/incidents/4471-split/+page.svx; rendered output is rendered/kb/incidents/4471-split/index.html. Incoming reports continue after the July merge burst, so these counts are a snapshot, not a live queue count.
+Run node --experimental-strip-types analyze.mjs from the repository root to reproduce the count. The signed KB source is src/routes/kb/incidents/4471-split/+page.svx; rendered output is rendered/kb/incidents/4471-split/index.html. Incoming reports continue after the July merge burst, so these counts are a snapshot, not a live queue count.
 
 ## Report IDs
 

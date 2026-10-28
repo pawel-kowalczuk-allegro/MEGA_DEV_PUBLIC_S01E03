@@ -10,7 +10,7 @@ export default {
     layout: { runbook: fileURLToPath(new URL('./src/lib/layouts/runbook.svelte', import.meta.url)) },
   })],
   kit: {
-    adapter: adapter({ pages: '../rendered', assets: '../rendered' }),
+    adapter: adapter({ pages: 'rendered', assets: 'rendered' }),
     alias: { '#lib': './src/lib' },
   },
 };
