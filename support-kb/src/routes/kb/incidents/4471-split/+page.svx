@@ -1,0 +1,90 @@
+---
+layout: runbook
+title: '#4471 · split by cause, not subject'
+owner: Paweł Kowalczuk / support desk
+status: investigated
+reviewed: 2026-10-28
+signature: 'Paweł Kowalczuk · GPT-6.1 Sol · S01E03 · 2026-10-28'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Finding
+
+The [original incident](/kb/incidents/4471) says that every report is one parser problem.
+Its live cause table contradicts that claim. The export contains two different problems;
+one queued parser fix does not address both. These are findings from the 4 October export,
+not evidence that either fix has shipped.
+
+<Callout kind="warn">
+Keep the parser and form-hint problems separate. A shared subject, a browser locale,
+or an intake tag does not establish a shared cause.
+</Callout>
+
+## Problems and counts
+
+<CauseTable ticket={4471} />
+
+The table deduplicates by report ID before filtering for the merged ticket. Classification
+uses the tenant directory, the platform's locale date order, the tenant's form version,
+and the report's channel. Intake tags are guesses, not the classification rule.
+
+### Parser: month-first interpretation for day-first tenants
+
+The shared parser treats a day-first tenant's date as month first. For example,
+`R-41203` reports a booking for 2 December whose invite says 12 February.
+`R-41200` and its correction `R-41201` illustrate why the wording alone is not reliable.
+
+The scope includes app and email reports as well as booking-v2 form reports; app and email
+can still reach this cause for tenants that run booking-v3. Fix date interpretation at the
+parser boundary, using the tenant's date format rather than the reporter's browser locale.
+Test ambiguous dates, dates whose day exceeds twelve, and month-first tenants as a control.
+
+The cause table preserves the desk's one-day-move caveat. Those reports describe a different
+symptom but the supplied classifier files them under parser. Their text alone does not
+prove a separate timezone bug; keep the discrepancy visible and investigate before splitting again.
+
+### Hint: booking-v3 instructs month first but reads day first
+
+For day-first tenants on booking-v3, the form prints `MM/DD/YYYY`, but reads the value in
+the tenant's day-first order. This is a separate form-hint defect, not fixed merely by
+changing the shared parser. Affected tenant handles are `alder.physio`, `copper.studio`,
+and `pale.harbour`. Align the displayed hint and the form's interpretation with the tenant
+locale, and test the date that reaches the booking and invite.
+
+The corresponding tickets are
+[parser issue 1](https://github.com/pawel-kowalczuk-allegro/MEGA_DEV_PUBLIC_S01E03/issues/1)
+and [form-hint issue 2](https://github.com/pawel-kowalczuk-allegro/MEGA_DEV_PUBLIC_S01E03/issues/2).
+Each includes the computed unique report count and report IDs for audit. The table above
+shows the original desk export's ticket ownership, before these new tickets were filed.
+
+## The desk still receives reports
+
+<QueueTimeline ticket={4471} />
+
+Compare received reports with merge activity. A burst of merges records desk processing,
+not the start of the defect, and marking the incident known did not stop incoming reports.
+Recompute from a fresh export before using these counts for the live queue.
+
+## Triage from here
+
+The [subject-only rule](/kb/triage/dedupe) and
+[accepted decision 0001](/kb/decisions/0001-dedupe-by-subject) were last reviewed in 2024.
+They are stale and conflict with the executable deduplication examples below.
+The accepted decision is preserved unchanged; this page records the contrary evidence,
+not an unapproved rewrite of that decision.
+
+<DedupeExplorer />
+
+For each incoming report, resolve its tenant, channel, locale, and form version before
+matching a cause. Same subject can hide different causes; different subjects can name the
+same cause. An unknown tenant is unresolved, not a match: investigate rather than merge.
+Use the cause-specific issue, retain the original report ID, and recompute its count.
+
+<RenderStamp {signature} />
