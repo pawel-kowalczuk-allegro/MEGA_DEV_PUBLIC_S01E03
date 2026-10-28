@@ -4,7 +4,7 @@ title: '#4471 · split by cause, not subject'
 owner: Paweł Kowalczuk / support desk
 status: resolved
 reviewed: 2026-10-28
-signature: 'Paweł Kowalczuk · GPT-6.1 Sol · S01E03 · 2026-10-28'
+signature: 'v1.eyJzdWIiOiIxMzY4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMDUwMzUsImV4cCI6MTc5MzI5MTQzNX0.lNparmtgNrTfrL_f0SAEBCikvKaozp-Nc4mR_jttnDg'
 ---
 
 <script>
